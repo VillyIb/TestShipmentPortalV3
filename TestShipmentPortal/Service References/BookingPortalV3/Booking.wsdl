@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://gtx.nu/ShipmentPortalV3/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://gtx.nu/ShipmentPortalV3/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gtx.nu/ShipmentPortalV3/">
+      <s:element name="Ping">
+        <s:complexType />
+      </s:element>
+      <s:element name="PingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Exception">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="code" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExceptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExceptionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Booking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accessUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accessPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:V3dRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="V3dRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OperationCode" type="tns:V3cOperationCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShipmentType" type="tns:V3cShipmentType" />
+          <s:element minOccurs="1" maxOccurs="1" name="Incoterm" type="tns:V3cIncoTerms" />
+          <s:element minOccurs="1" maxOccurs="1" name="SalesproductId" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShippingDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ParcelList" type="tns:V3dParcel" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExportType" type="tns:V3cExportType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UploadDocumentList" type="tns:V3dUploadDocument" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageEncoding" type="tns:V3cImageEncoding" />
+          <s:element minOccurs="1" maxOccurs="1" name="WaybillImageFormat" type="tns:V3cWaybillImageFormat" />
+          <s:element minOccurs="1" maxOccurs="1" name="WaybillReturnCode" type="tns:V3cWaybillReturnCode" />
+          <s:element minOccurs="1" maxOccurs="1" name="WayBillReturnEmail" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomsValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomsCurrencyCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceValue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuranceCurrencyCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuredByCarrier" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="S01ReceiverPays" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="S01PayingAccountNumber" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="S02ReceiverPays" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="S02PayingAccountNumber" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DangerousGoodsAccessibilityType" type="tns:V3cDangerousGoodsAccessibilityType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NotifyReceiver" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalServiceList" type="tns:ArrayOfV3dService" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddressPickup" nillable="true" type="tns:V3dAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressReceiver" type="tns:V3dAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressSender" type="tns:V3dAddress" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddressReturn" nillable="true" type="tns:V3dAddress" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickupHandling" type="tns:V3cPickupHandling" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickupDelivery" type="tns:V3cPickupDelivery" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickupFrom" type="s:time" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickupUntil" type="s:time" />
+          <s:element minOccurs="1" maxOccurs="1" name="DropPoint" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryNotificationSms" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryNotificationEmail" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cOperationCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="Test" />
+          <s:enumeration value="Live" />
+          <s:enumeration value="Sandbox" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cShipmentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Document" />
+          <s:enumeration value="NonDocument" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cIncoTerms">
+        <s:restriction base="s:string">
+          <s:enumeration value="DAP" />
+          <s:enumeration value="DDP" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="V3dParcel">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DryIceWeight" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cExportType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Permanent" />
+          <s:enumeration value="Temporatry" />
+          <s:enumeration value="Return" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="V3dUploadDocument">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ImageType" type="tns:V3cUploadDocumentType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageEncoding" type="tns:V3cUploadDocumentEncoding" />
+          <s:element minOccurs="0" maxOccurs="1" name="Filename" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageBase64" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cUploadDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Invoice" />
+          <s:enumeration value="ExportDeclaration" />
+          <s:enumeration value="DangerousGoods" />
+          <s:enumeration value="Other" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cUploadDocumentEncoding">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="PDF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cImageEncoding">
+        <s:restriction base="s:string">
+          <s:enumeration value="PDF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cWaybillImageFormat">
+        <s:restriction base="s:string">
+          <s:enumeration value="A4" />
+          <s:enumeration value="LabelPrint" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cWaybillReturnCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Immediately" />
+          <s:enumeration value="Email" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cDangerousGoodsAccessibilityType">
+        <s:restriction base="s:string">
+          <s:enumeration value="NotApplicable" />
+          <s:enumeration value="Inaccessible" />
+          <s:enumeration value="Accessible" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfV3dService">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AdditionalService" nillable="true" type="tns:V3dService" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="V3dService">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceCode" type="tns:V3cServiceCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParameterList" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cServiceCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="SUNDEF" />
+          <s:enumeration value="SDPSTD" />
+          <s:enumeration value="DGACCS" />
+          <s:enumeration value="DGINAC" />
+          <s:enumeration value="DGFULL" />
+          <s:enumeration value="DGLITB" />
+          <s:enumeration value="DGBIOS" />
+          <s:enumeration value="DRYICE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="V3dAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attention" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZipCode" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cPickupHandling">
+        <s:restriction base="s:string">
+          <s:enumeration value="Disabled" />
+          <s:enumeration value="Conditional" />
+          <s:enumeration value="Unconditional" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="V3cPickupDelivery">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Email" />
+          <s:enumeration value="Online" />
+          <s:enumeration value="OnlineOrEmail" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="BookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BookingResult" type="tns:V3dResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="V3dResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RequestId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Direction" type="tns:V3cDirection" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusList" type="tns:ArrayOfV3dStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierProduct" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BilledWeight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShipmentCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RemoteAreaServiceCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OilChargeCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCost" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="WayBillNumberHead" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParcelWaybillnumberList" type="tns:ArrayOfString1" />
+          <s:element minOccurs="0" maxOccurs="1" name="BinaryImageList" type="tns:ArrayOfV3dBinaryImage" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cDirection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Export" />
+          <s:enumeration value="Import" />
+          <s:enumeration value="ThreeWay" />
+          <s:enumeration value="Domestic" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfV3dStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="V3dStatus" nillable="true" type="tns:V3dStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="V3dStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Severity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfV3dBinaryImage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="V3dBinaryImage" nillable="true" type="tns:V3dBinaryImage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="V3dBinaryImage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ImageType" type="tns:V3cImageType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageEncoding" type="tns:V3cImageEncoding" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageBase64" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="V3cImageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="WaybillHead" />
+          <s:enumeration value="WaybillParcel" />
+          <s:enumeration value="Multipage" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PingSoapIn">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapOut">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionSoapIn">
+    <wsdl:part name="parameters" element="tns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionSoapOut">
+    <wsdl:part name="parameters" element="tns:ExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="BookingSoapIn">
+    <wsdl:part name="parameters" element="tns:Booking" />
+  </wsdl:message>
+  <wsdl:message name="BookingSoapOut">
+    <wsdl:part name="parameters" element="tns:BookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="PingHttpGetIn" />
+  <wsdl:message name="PingHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionHttpGetIn">
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PingHttpPostIn" />
+  <wsdl:message name="PingHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionHttpPostIn">
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExceptionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="V3BookingSoap">
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingSoapIn" />
+      <wsdl:output message="tns:PingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test ArgumentException</wsdl:documentation>
+      <wsdl:input message="tns:ExceptionSoapIn" />
+      <wsdl:output message="tns:ExceptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Booking">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Booking V3</wsdl:documentation>
+      <wsdl:input message="tns:BookingSoapIn" />
+      <wsdl:output message="tns:BookingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="V3BookingHttpGet">
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingHttpGetIn" />
+      <wsdl:output message="tns:PingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test ArgumentException</wsdl:documentation>
+      <wsdl:input message="tns:ExceptionHttpGetIn" />
+      <wsdl:output message="tns:ExceptionHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="V3BookingHttpPost">
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingHttpPostIn" />
+      <wsdl:output message="tns:PingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test ArgumentException</wsdl:documentation>
+      <wsdl:input message="tns:ExceptionHttpPostIn" />
+      <wsdl:output message="tns:ExceptionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="V3BookingSoap" type="tns:V3BookingSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://gtx.nu/ShipmentPortalV3/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <soap:operation soapAction="http://gtx.nu/ShipmentPortalV3/Exception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Booking">
+      <soap:operation soapAction="http://gtx.nu/ShipmentPortalV3/Booking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="V3BookingSoap12" type="tns:V3BookingSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://gtx.nu/ShipmentPortalV3/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <soap12:operation soapAction="http://gtx.nu/ShipmentPortalV3/Exception" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Booking">
+      <soap12:operation soapAction="http://gtx.nu/ShipmentPortalV3/Booking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="V3BookingHttpGet" type="tns:V3BookingHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Ping">
+      <http:operation location="/Ping" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <http:operation location="/Exception" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="V3BookingHttpPost" type="tns:V3BookingHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Ping">
+      <http:operation location="/Ping" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exception">
+      <http:operation location="/Exception" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="V3Booking">
+    <wsdl:port name="V3BookingSoap" binding="tns:V3BookingSoap">
+      <soap:address location="http://77.66.63.149/Services/Public/V3/Booking.asmx" />
+    </wsdl:port>
+    <wsdl:port name="V3BookingSoap12" binding="tns:V3BookingSoap12">
+      <soap12:address location="http://77.66.63.149/Services/Public/V3/Booking.asmx" />
+    </wsdl:port>
+    <wsdl:port name="V3BookingHttpGet" binding="tns:V3BookingHttpGet">
+      <http:address location="http://77.66.63.149/Services/Public/V3/Booking.asmx" />
+    </wsdl:port>
+    <wsdl:port name="V3BookingHttpPost" binding="tns:V3BookingHttpPost">
+      <http:address location="http://77.66.63.149/Services/Public/V3/Booking.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
